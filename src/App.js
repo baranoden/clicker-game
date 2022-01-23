@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  var workers = {
+    products: 0,
+    upgrades: {
+      machine: {
+        amount: 0,
+        cost: 10,
+        gps: 1,
+        name: "machines",
+      },
+    },
+  };
+  function handleClick(e) {
+    workers[e]++;
+  }
+  // const localizedWorkers = workers.toLocaleString("en-US");
+  // const localizedProduct = workers[i].toLocaleString("en-US");
+  // const localizedMachine = machine.toLocaleString("en-US");
+
+  function upgradeCount() {
+    setInterval(() => {
+      for (i in workers.upgrades) {
+        workers.products +=
+          (workers.upgrades[i].amount * workers.upgrades[i].gps) / 5;
+      }
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>Workers:</div>
+      <div>Machine:</div>
+      <div>Product:</div>
+      <button onClick={handleClick}>Buy Worker</button>
+      <button>Buy Machine</button>
     </div>
   );
 }
